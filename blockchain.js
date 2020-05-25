@@ -67,15 +67,18 @@ class Blockchain{
         this.chain=[this.createGenesisBlock()];
         this.difficulty = 3;
         this.pendingTransactions = [];
-        this.miningReward = 110;
+        this.miningReward = 150;
     }
     createGenesisBlock(){
-        return new Block("25/3/2020","Genesis","0");
+        return new Block(Date.now(),"Genesis","0");
     }
     getLatestBlock(){
         return this.chain[this.chain.length -1 ];
     }
     minePendingTransactions(miningRewardAddress){
+    const rewardTx = new Transaction(null, miningRewardAddress,this.miningReward);
+    this.pendingTransactions.push(rewardTx);
+
      let block = new Block(Date.now(), this.pendingTransactions);
      block.mineBlock(this.difficulty);
 
@@ -137,3 +140,4 @@ class Blockchain{
 }
 module.exports.Blockchain= Blockchain;
 module.exports.Transaction=Transaction;
+module.exports.Block = Block;

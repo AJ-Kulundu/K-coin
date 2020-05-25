@@ -12,7 +12,20 @@ const tx1 = new Transaction(myWalletAddress,'public Key goes here', 0);
 tx1.signTransaction(myKey);
 Kcoin.addTransaction(tx1);
 
+//Mine Block
 console.log('\n Starting the miner...');
 Kcoin.minePendingTransactions(myWalletAddress);
+
+console.log('\nBalance of Arnold is', Kcoin.getBalanceOfAddress(myWalletAddress));
+
+const tx2 = new Transaction(myWalletAddress, 'address1', 50);
+tx2.signTransaction(myKey);
+Kcoin.addTransaction(tx2);
+
+//Mine Block
+console.log('\n Mining another block...');
+Kcoin.minePendingTransactions(myWalletAddress);
+
+//get wallet balance
 
 console.log('\nBalance of Arnold is', Kcoin.getBalanceOfAddress(myWalletAddress));
